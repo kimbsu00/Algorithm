@@ -90,7 +90,7 @@ public:
 	bool pushFront(char data);
 	bool pushBack(char data);
 
-	char popFornt();
+	char popFront();
 	char popBack();
 
 	char getFront();
@@ -168,7 +168,7 @@ bool Dequeue::pushBack(char data)
 	}
 }
 
-char Dequeue::popFornt()
+char Dequeue::popFront()
 {
 	// when Dequeue doesn't have node
 	if (head == nullptr) {
