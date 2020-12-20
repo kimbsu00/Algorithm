@@ -1,3 +1,11 @@
+/*
+   url: https://algospot.com/judge/problem/read/FORTRESS#
+   
+   루트-리프 사이의 거리가 최장거리인 경우와 리프-리프 사이의 거리가 최장거리인 경우 이렇게 2가지의 경우가 존재하는 문제
+   리프-리프 사이의 거리를 구할 때, 경로상에 루트 노드가 반드시 존재해야 한다고 생각해서 많이 고민했던 문제
+   루트 노드가 아닌 다른 노드를 루트로 하는 서브트리에서 리프-리프 사이의 거리가 최장거리가 될 수도 있음을 알게 됨
+*/
+
 #include<iostream>
 #include<vector>
 #include<cstdlib>
