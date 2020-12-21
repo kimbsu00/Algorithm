@@ -7,7 +7,7 @@
   https://algospot.com/forum/read/2496/ 을 참고해서 
   input method 를 cin 에서 printf 로 변경해봤지만 그래도 시간초과
   getchar 로 정수값만을 파싱해서 입력받아도 시간초과
-  -> 알고리즘이 느린것이다 
+  -> 알고리즘이 느린것이다 라는 결론을 내림
 */
 
 #include<iostream>
