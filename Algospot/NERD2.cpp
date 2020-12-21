@@ -358,10 +358,12 @@ int main() {
 		cin >> N;
 		
 		int p, q;
+		//cin >> p >> q;
 		scanf("%d %d", &p, &q);
 		BST bst(p, q);
 		answer[i] += bst.getNodeNum();
 		for (int j = 1; j < N; j++) {
+			//cin >> p >> q;
 			scanf("%d %d", &p, &q);
 			bst.Insert(p, q);
 			answer[i] += bst.getNodeNum();
