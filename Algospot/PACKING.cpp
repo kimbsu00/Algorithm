@@ -1,10 +1,7 @@
 /*
   url: https://algospot.com/judge/problem/read/PACKING
   
-  아래의 코드로 알고스팟에 답안 제출을 하면 다음과 같은 에러메시지와 함께 런타임 오류가 발생한다.
-  "RTE (SIGSEGV: segmentation fault, probably incorrect memory access or stack overflow)"
-  처음에는 배열의 인덱스 접근에 오류가 있는줄 알았으나, 내가 생각했을 때 이 코드에서 인덱스 접근 오류는 발생하지 않는다는 결론을 내림.
-  캐시 메모리의 자료형이 스택이라서 메모리 초과가 발생하고 있다는 결론.
+  시간초과
 */
 
 #include<iostream> 
@@ -29,7 +26,7 @@ vector<int> need;
 int main(void) {
 	int C;
 	cin >> C;
-	vector<stack<int>> answer(C);
+	vector<string> answer;
 
 	for (int i = 0; i < C; i++) {
 		fill(&cache[0][0], &cache[1000][100], stack<int>());
@@ -48,21 +45,20 @@ int main(void) {
 			need.push_back(n);
 		}
 		
-		answer[i] = solve(0, 0, 0);
-	}
-
-	for (int i = 0; i < C; i++) {
-		int temp = 0, count = 0;
+		stack<int> temp = solve(0, 0, 0);
+		int sum = 0, count = temp.size();
 		string str = "";
-		while (!answer[i].empty()) {
-			int index = answer[i].top();
-			answer[i].pop();
-			temp += need[index];
-			count++;
+		while (!temp.empty()) {
+			int index = temp.top();
+			temp.pop();
+			sum += need[index];
 			str += object[index] + "\n";
 		}
-		cout << temp << " " << count << endl << str;
+		answer.push_back(to_string(sum) + " " + to_string(count) + "\n" + str);
 	}
+
+	for (int i = 0; i < C; i++)
+		cout << answer[i];
 
 	return 0;
 }
