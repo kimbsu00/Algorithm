@@ -1,3 +1,7 @@
+/*
+	url: https://algospot.com/judge/problem/read/BOARDCOVER
+*/
+
 #include<iostream>	
 #include<algorithm>
 #include<vector>
