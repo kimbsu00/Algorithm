@@ -64,9 +64,11 @@ int solve(string wildcard, string filename) {
 	if (filename.size() == 0 && wildcard.size() == 0)
 		return TRUE;
 
+	// filename 에 비교할 문자가 더 존재하지 않고, wildcard 에 '?' 와 '*' 가 아닌 문자가 존재하는 경우 -> 일치하지 않음
 	if (filename.size() == 0 && !(wildcard.at(0) == '?' || wildcard.at(0) == '*')) 
 		return FALSE;
 	
+	// filename이 wildcard 보다 더 긴 경우 -> 일치하지 않음
 	if (filename.size() > 0 && wildcard.size() == 0)
 		return FALSE;
 
@@ -76,20 +78,30 @@ int solve(string wildcard, string filename) {
 		return ret;
 
 	if (wildcard.at(0) == '?') {
+		// filename 에 비교할 문자가 더 존재하는 경우 -> '?' 를 filename.at(0) 으로 간주하고 재귀호출
 		if (filename.size() > 0) {
 			ret = solve(wildcard.substr(1, wildcard.size() - 1), filename.substr(1, filename.size() - 1));
 		}
+		// filename 에 비교할 문자가 더 존재하지 않는 경우 -> '?' 를 공백으로 간주하고 재귀호출
 		ret = max(ret, solve(wildcard.substr(1, wildcard.size() - 1), filename));
 	}
 	else if (wildcard.at(0) == '*') {
+		/* 
+		filename 에 비교할 문자가 더 존재하는 경우 
+		-> filename.at(0) 을 '*' 의 부분문자열로 간주하고 재귀호출 하거나,
+		-> filename.at(0) 을 '*' 로 간주하고 재귀호출
+		*/
 		if (filename.size() > 0) {
 			ret = max(solve(wildcard, filename.substr(1, filename.size() - 1)), solve(wildcard.substr(1, wildcard.size() - 1), filename.substr(1, filename.size() - 1)));
 		}
+		// filename 에 비교할 문자가 더 존재하지 않는 경우 -> '*' 을 공백으로 간주하고 재귀호출
 		ret = max(ret, solve(wildcard.substr(1, wildcard.size() - 1), filename));
 	}
+	// wildcard.at(0) 과 filename.at(0) 이 같은 경우 -> 서브스트링끼리 재귀호출
 	else if (wildcard.at(0) == filename.at(0)) {
 		ret = solve(wildcard.substr(1, wildcard.size() - 1), filename.substr(1, filename.size() - 1));
 	}
+	// wildcard.at(0) 이 '?' 도 아니고, '*' 도 아닌 경우에 filename.at(0) 과도 다른 경우 -> 일치하지 않음
 	else {
 		ret = FALSE;
 	}
