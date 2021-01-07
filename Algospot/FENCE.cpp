@@ -1,6 +1,5 @@
 /*
-2019년 09월 05일 작성
-정답 코드
+	url: https://algospot.com/judge/problem/read/FENCE
 */
 
 #include<iostream>
@@ -9,74 +8,71 @@
 
 using namespace std;
 
-int get_left(int index, vector<int>& height)
-{
-	int ret = -1;
-	for (int i = index - 1; i >= 0; i--)
-	{
-		if (height[index] > height[i])
-		{
-			ret = i;
-			break;
+int FENCE();
+int getLeft(int index);
+int getRight(int index);
+
+vector<int> fence;
+
+int main(void) {
+	int C;
+	cin >> C;
+	vector<int> answer(C);
+	
+	for (int i = 0; i < C; i++) {
+		fence.clear();
+		fence.push_back(-1);
+
+		int N;
+		cin >> N;
+		for (int k = 0; k < N; k++) {
+			int temp;
+			cin >> temp;
+			fence.push_back(temp);
 		}
-	}
-	if (ret != -1)
-		return ret;
-	
-	return 0;
-}
+		fence.push_back(-1);
 
-int get_right(int index, vector<int>& height)
-{
-	int ret = height.size();
-	for (int i = index + 1; i < height.size(); i++)
-	{
-		if (height[index] > height[i])
-		{
-			ret = i;
-			break;
-		}
-	}
-	if (ret != height.size())
-		return ret;
-	
-	return height.size() - 1;
-}
-
-int max_size(vector<int>& height)
-{
-	vector<int> size(height.size(), -1);
-	for (int i = 0; i < height.size(); i++)
-	{
-		size[i] = (get_right(i, height) - get_left(i, height) - 1) * height[i];
+		answer[i] = FENCE();
 	}
 
-	return *max_element(size.begin(), size.end());
-}
-
-int main(void)
-{
-	int c;
-	cin >> c;
-	vector<int> answer(c, -1);
-
-	for (int tc = 0; tc < c; tc++)
-	{
-		int n;
-		cin >> n;
-		// n개의 울타리 높이를 입력받음
-		// 맨 왼쪽과 맨 오른쪽에는 높이를 -1로 설정하여 더 이상 울타리가 존재하지 않음을 표시
-		vector<int> height(n + 2, -1);
-		height[0] = -1;
-		height[n + 1] = -1;
-		for (int i = 1; i < n + 1; i++)
-			cin >> height[i];
-
-		answer[tc] = max_size(height);
-	}
-	
-	for (int i = 0; i < answer.size(); i++)
+	for (int i = 0; i < C; i++)
 		cout << answer[i] << endl;
 
 	return 0;
+}
+
+int FENCE() {
+	int ret = 0;
+
+	for (int i = 1; i < fence.size() - 1; i++) {
+		int left = getLeft(i);
+		int right = getRight(i);
+		int size = (right - left + 1) * fence[i];
+
+		ret = max(ret, size);
+	}
+
+	return ret;
+}
+
+int getLeft(int index) {
+	int ret = index;
+
+	for (int i = index - 1; i > 0; i--) {
+		if (fence[i] < fence[index])		break;
+		ret = i;
+	}
+
+	return ret;
+}
+
+int getRight(int index) {
+	int ret = index;
+
+	for (int i = index + 1; i < fence.size(); i++) {
+		if (fence[i] < fence[index])		break;
+		ret = i;
+	}
+	
+	return ret;
 }
