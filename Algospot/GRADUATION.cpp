@@ -86,6 +86,7 @@ int GRADUATION(int termNum, unsigned int taken, vector<unsigned int>& preRequire
 	int index = 0;
 	// 이번 학기에 열리는 수업들 중에서 수강 가능한 과목들을 canTake 변수에 저장
 	canTake = (term[termNum] & ~taken);
+	// canTake 에 저장된 과목들 중에서 선수과목 때문에 수강할 수 없는 과목들을 걸러
 	for (int i = 0; i < N; i++) {
 		if (canTake & (1 << i)) {
 			if ((taken & preRequired[i]) != preRequired[i]) {
