@@ -73,7 +73,7 @@ int main(void) {
 
 int GRADUATION(int termNum, unsigned int taken, vector<unsigned int>& preRequired, vector<unsigned int>& term) {
 	// 기저 사례 처리
-	//if (__popcnt(taken) == K)		return termNum - 1;
+	//if (__popcnt(taken) == K)		return 0;
 	if (__builtin_popcount(taken) == K)		return 0;
 
 	if (termNum == M)		return MAX;
