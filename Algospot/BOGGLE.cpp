@@ -27,7 +27,7 @@ int main(void)
 
 		// input boggle board
 		for (int i = 0; i < GAMESIZE; i++)
-		{
+		{ 
 			string str;
 			cin >> str;
 			vector<char> vec(str.size());
