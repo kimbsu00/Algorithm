@@ -20,7 +20,7 @@ int main(void)
 	cin >> C;
 
 	for (int tc = 0; tc < C; tc++)
-	{
+	{ 
 		// vector and cache clear
 		boggle.clear();
 		fill(&cache[0][0][0], &cache[4][4][8], false);
