@@ -2,7 +2,7 @@
   url: https://algospot.com/judge/problem/read/RUNNINGMEDIAN
 */
 
-/*
+/* 
 	A[i] 에 대응되는 노드의 왼쪽 자손은 A[2*i +1]
 	A[i] 에 대응되는 노드의 오른쪽 자손은 A[2*i +2]
 	A[i] 에 대응되는 노드의 부모는 A[(i-1)/2]	(나눗셈의 결과는 내림함)
