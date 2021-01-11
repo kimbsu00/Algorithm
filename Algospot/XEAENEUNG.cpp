@@ -198,6 +198,7 @@ bool XEAENEUNG(vector<string>& parsing) {
 /*
 문제의 인풋 조건을 제대로 확인하지 않고 생각할 때, string 을 token 을 기준으로 자르는 함수가 필요하다고 생각해서 구현했음.
 token 을 기준으로 str 을 자른 조각들을 vector<string> 에 저장해서 리턴하는 함수.
+#include<sstream> 
 */
 vector<string> split(string& str, char token) {
 	vector<string> ret;
