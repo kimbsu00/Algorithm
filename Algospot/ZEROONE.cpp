@@ -1,7 +1,7 @@
 /*
   url: https://algospot.com/judge/problem/read/ZEROONE
   
-  31, 33번 줄에 있는 printf() 함수를 사용해서 정답을 출력하면 1228ms 가 걸리고,
+  33, 35번 줄에 있는 printf() 함수를 사용해서 정답을 출력하면 1228ms 가 걸리고,
                      cout 함수를 사용해서 정답을 출력하면 1208ms 가 걸린다?
                      printf() 가 cout 보다 훨씬 더 빠른거로 알고 있는데 뭔가 이상하다..
 */
