@@ -39,7 +39,7 @@ int main(void) {
 
 /* 
 if input is weird number -> return false 
-else							       -> return true
+else			 -> return true
 */
 bool WEIRD() {
 	vector<int> divisors = getDivisors(input);
