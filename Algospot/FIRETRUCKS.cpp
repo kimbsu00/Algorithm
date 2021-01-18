@@ -1,5 +1,8 @@
 /*
   url: https://algospot.com/judge/problem/read/FIRETRUCKS
+  
+  다익스트라 알고리즘을 이용함.
+  모든 소방서들과 연결된 임의의 장소 A 한개를 만들고, 모든 소방서들과의 거리를 0으로 설정한 후에, A에서 화재 장소까지의 최소 거리를 구하면 된다.
 */
 
 #include<iostream>
