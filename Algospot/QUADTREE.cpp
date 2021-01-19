@@ -185,6 +185,14 @@ string QuadTree::_Insert(CNode * node, string input)
 
 			if (insert->getKey() == 'x')
 			{
+				/* 
+				_Insert() 함수를 재귀 호출 할 때마다 input 이 변경되기 때문에 인덱스를 맞춰주기 위해서 diff 라는 변수를 사용함
+				string.substr(int n) 함수는 string 의 [n, end) 에 해당하는 문자열을 반환하는 함수이다.
+				ex)
+				input = "wwwxwwbbb" 라고 하자. 
+				i = 3 일 때, input[i] = 'x' 이기 때문에 재귀호출을 수행하게 되고, 재귀호출이 끝난 후에 input = "b" 가 되므로 
+				i = 4 일 때, input[i] = "b" 가 되기 위해서는 i 에서 4를 빼줘야 가능하기 때문에 diff = i + 1 이 된다.
+				*/
 				input = _Insert(insert, input.substr(i + 1 - diff));
 				diff = i + 1;
 			}
