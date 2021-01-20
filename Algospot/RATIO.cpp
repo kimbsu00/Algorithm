@@ -11,8 +11,8 @@ using namespace std;
 void RATIO(unsigned int left, unsigned int right);
 
 vector<int> save;		// 승률이 1 이상 증가하게 되는 연승의 수를 저장하는 배열
-double N, M;				// 플레이 횟수, 승리 횟수
-int ratio;						// 승률
+double N, M;			// 플레이 횟수, 승리 횟수
+int ratio;			// 승률
 unsigned int range;		// 가능한 연승의 범위 [0, range]
 
 /*
