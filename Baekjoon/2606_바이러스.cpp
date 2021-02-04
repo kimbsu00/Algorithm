@@ -1,70 +1,47 @@
+/*
+  url: https://www.acmicpc.net/problem/2606
+*/
+
 #include<iostream>
-#define MAX_V 100
+#include<vector>
 
 using namespace std;
 
-int root[MAX_V];
-int _rank[MAX_V];
+void solve(int node);
 
-int Find(int index);
-void Union(int index1, int index2);
+vector<vector<int>> graph;
+vector<bool> visited;
+int infected = 0;
 
-int main(void)
-{
-	int computer;			// # of computer
-	int count;				// 조합의 개수
-	cin >> computer >> count;
-	
-	for (int i = 0; i < MAX_V; i++)
-	{
-		root[i] = i;
-		_rank[i] = 0;
+int main(void) {
+	ios_base::sync_with_stdio(0);
+	cin.tie(0);
+
+	int N, E;		// 컴퓨터의 수, 엣지의 수
+	cin >> N >> E;
+
+	graph = vector<vector<int>>(N, vector<int>());
+	visited = vector<bool>(N, false);
+
+	for (int i = 0; i < E; i++) {
+		int a, b;
+		cin >> a >> b;
+		graph[a - 1].push_back(b - 1);
+		graph[b - 1].push_back(a - 1);
 	}
 
-	for (int i = 0; i < count; i++)
-	{
-		int num1, num2;
-		cin >> num1 >> num2;
-		Union(num1 - 1, num2 - 1);
-	}
+	solve(0);
+	cout << infected - 1 << "\n";
 
-	int answer = -1;
-	for (int i = 0; i < computer; i++)
-	{
-		if (root[i] == root[0])
-			answer++;
-	}
-	cout << answer << endl;
-	
 	return 0;
 }
 
-int Find(int index)
-{
-	if (root[index] == index)
-		return index;
+void solve(int node) {
+	if (visited[node])			return;
 
-	return root[index] = Find(root[index]);
-}
-
-void Union(int index1, int index2)
-{
-	int first = Find(index1);
-	int second = Find(index2);
-
-	if (first == second)
-		return;
-
-	if (_rank[first] < _rank[second])
-	{
-		root[first] = second;
-	}
-	else
-	{
-		root[second] = first;
-		if (_rank[first] == _rank[second])
-		{
-			_rank[first]++;
-		}
+	infected += 1;
+	visited[node] = true;
+	for (int next : graph[node]) {
+		solve(next);
 	}
 }
