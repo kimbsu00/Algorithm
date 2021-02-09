@@ -72,7 +72,7 @@ bool Trie::Insert(string input)
 	char ch = input[0];
 	int index = ch - '0';
     
-    if (input.size() == 1)
+    	if (input.size() == 1)
 		root[index]->isEnd = true;
 
 	return _Insert(root[index], input.substr(1));
@@ -82,7 +82,7 @@ bool Trie::_Insert(Node* node, string input)
 {
 	if (input.size() == 0)			return true;
 
-	if (node->isEnd)				return false;
+	if (node->isEnd)			return false;
 
 	char ch = input[0];
 	int index = ch - '0';
