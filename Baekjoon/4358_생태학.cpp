@@ -17,7 +17,7 @@
 
 using namespace std;
 
-int main(void) {
+int main(void) {	
 	int count = 0;
 	map<string, int> trie;
 
