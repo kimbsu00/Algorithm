@@ -1,7 +1,7 @@
 /*
   url: https://www.acmicpc.net/problem/11812
   
-  17번째 줄에 K 를 int 형으로 선언하고 나머지 코드를 똑같이 해서 제출하면 오답처리가 된다.
+  23번째 줄에 K 를 int 형으로 선언하고 나머지 코드를 똑같이 해서 제출하면 오답처리가 된다.
  
   y = ((y - 2) / K) + 1; 
   x = ((x - 2) / K) + 1;
@@ -20,7 +20,7 @@ int main(void) {
 	ios_base::sync_with_stdio(0);
 	cin.tie(0);
 
-  long long N, K, Q;
+ 	long long N, K, Q;
 	cin >> N >> K >> Q;
 
 	for (int i = 0; i < Q; i++) {
