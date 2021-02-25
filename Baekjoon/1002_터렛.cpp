@@ -31,7 +31,7 @@ int main() {
 		// 내접하는 경우
 		else if(distance == abs(r1-r2)) {
 			answer[i] = 1;
-		}
+		} 
 		// 두 점에서 만나는 경우
 		else if(distance < r1+r2 && distance > abs(r1-r2)) {
 			answer[i] = 2;
