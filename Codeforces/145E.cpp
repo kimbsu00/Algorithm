@@ -1,5 +1,8 @@
 /*
   url: https://codeforces.com/problemset/problem/145/E
+  
+  문제 푸는데 참고했던 웹사이트
+  https://wasd222.blogspot.com/2020/05/codeforce-lucky-queries145e.html
 */
 
 #include<cstdio>
