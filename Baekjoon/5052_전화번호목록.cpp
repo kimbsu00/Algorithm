@@ -1,140 +1,103 @@
 /*
   url: https://www.acmicpc.net/problem/5052
-  
-  트라이를 직접 구현해서 해결함.
-  트라이에 문자열을 Insert 하기 전에 문자열 길이에 대하여 오름차순 정렬을 수행한 후에 Insert 를 진행함.
-  임의의 전화번호(A)가 다른 전화번호(B)의 접두사가 되려면, A 의 길이 < B 의 길이 이어야만 하기 때문에,
-  길이가 짧은 전화번호를 먼저 Insert 하고, 길이가 긴 전화번호를 Insert 하면,
-  길이가 긴 전화번호를 Insert 하는 과정에서 이전에 Insert 했던 전화번호가 존재하는지 여부를 쉽게 판단할 수 있다.
 */
 
-#include<iostream>
-#include<vector>
-#include<string>
-#include<algorithm>
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+
+#define SIZE 10
 
 using namespace std;
 
-class Node
-{
+class Node {
 public:
-	char data;
-	bool isEnd;
-	vector<Node*> next[10];
+	char ch;
+	bool is_end;
+	vector<Node*> next;
 
-public:
-	Node();
-	Node(char data, bool isEnd);
-	~Node();
-};
-
-Node::Node()
-	: data(' '), isEnd(false)
-{
-}
-
-Node::Node(char data, bool isEnd)
-	: data(data), isEnd(isEnd)
-{
-}
-
-Node::~Node()
-{
-}
-
-class Trie
-{
-public:
-	vector<Node*> root;
-
-public:
-	Trie();
-	~Trie();
-
-	bool Insert(string input);
-	bool _Insert(Node* node, string input);
-};
-
-Trie::Trie()
-	: root(vector<Node*>(10))
-{
-	for (int i = 0; i < 10; i++) {
-		root[i] = new Node('0' + i, false);
+	Node()
+		: ch(' '), is_end(false)
+	{
+		next = vector<Node*>(SIZE, nullptr);
 	}
-}
 
-Trie::~Trie()
-{
-}
+	Node(char ch)
+		: ch(ch), is_end(false)
+	{
+		next = vector<Node*>(SIZE, nullptr);
+	}
+};
 
-bool Trie::Insert(string input)
-{
-	char ch = input[0];
-	int index = ch - '0';
-    
-    	if (input.size() == 1)
-		root[index]->isEnd = true;
+class Trie {
+public:
+	Node* root;
 
-	return _Insert(root[index], input.substr(1));
-}
+	Trie() {
+		root = new Node();
+	}
 
-bool Trie::_Insert(Node* node, string input)
-{
-	if (input.size() == 0)			return true;
+	bool insert(string input) {
+		return _insert(root, input);
+	}
 
-	if (node->isEnd)			return false;
+	bool _insert(Node* node, string input) {
+		if (node->is_end)			return false;
 
-	char ch = input[0];
-	int index = ch - '0';
-	for (Node* next : node->next[index]) {
-		if (next->data == ch) {
-			return _Insert(next, input.substr(1));
+		if (input.empty()) {
+			node->is_end = true;
+			return true;
+		}
+		
+		char ch = input[0];
+		int idx = ch - '0';
+
+		if (node->next[idx] == nullptr) {
+			Node* tmp = new Node(ch);
+			node->next[idx] = tmp;
+			return _insert(tmp, input.substr(1));
+		} 
+		else {
+			return _insert(node->next[idx], input.substr(1));
 		}
 	}
+};
 
-	Node* next = new Node(ch, input.size() == 1);
-	node->next[index].push_back(next);
-	return _Insert(next, input.substr(1));
+bool compare(const string& a, const string& b) {
+	return a.size() < b.size();
 }
-
-bool compare(const string& a, const string& b);
-
-vector<string> number;
 
 int main(void) {
 	ios_base::sync_with_stdio(0);
 	cin.tie(0);
 
+	vector<string> answer;
+
 	int T;
 	cin >> T;
-	vector<bool> answer(T, true);
+	for (int t = 0; t < T; t++) {
+		Trie* trie = new Trie();
 
-	for (int i = 0; i < T; i++) {
 		int N;
 		cin >> N;
 
-		number = vector<string>(N);
-		for (int j = 0; j < N; j++) {
-			cin >> number[j];
+		vector<string> inputs(N);
+		for (int n = 0; n < N; n++) {
+			cin >> inputs[n];
 		}
+		sort(inputs.begin(), inputs.end(), compare);
 
-		sort(number.begin(), number.end(), compare);
-
-		Trie trie;
-		for (string input : number) {
-			if (!trie.Insert(input)) {
-				answer[i] = false;
-				break;
-			}
+		bool flag = true;
+		for (string input: inputs) {
+			if (!(flag = trie->insert(input)))			break;
 		}
+		answer.push_back(flag ? "YES" : "NO");
 	}
 
-	for (bool output : answer)
-		cout << (output ? "YES\n" : "NO\n");
+	for (string ans : answer) {
+		cout << ans << "\n";
+	}
 
 	return 0;
-}
-
-bool compare(const string& a, const string& b) {
-	return a.size() < b.size();
 }
