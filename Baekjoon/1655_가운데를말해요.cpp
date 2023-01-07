@@ -26,21 +26,17 @@ int main(void)
     {
         cin >> input;
 
-        if (min_heap.empty() && max_heap.empty())
+        if (max_heap.size() == min_heap.size() + 1)
         {
-            max_heap.push(input);
+            min_heap.push(input);
         }
         else
         {
-            if (max_heap.size() == min_heap.size() + 1)
-            {
-                min_heap.push(input);
-            }
-            else
-            {
-                max_heap.push(input);
-            }
+            max_heap.push(input);
+        }
 
+        if (!min_heap.empty() && !max_heap.empty())
+        {
             int min_top = min_heap.top();
             int max_top = max_heap.top();
             if (min_top < max_top)
