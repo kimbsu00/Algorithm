@@ -76,7 +76,7 @@ void kruskal_algorithm()
         }
     }
 
-    while (!pq.empty())
+    while (mst.size() < N - 1 && !pq.empty())
     {
         Edge edge = pq.top();
         pq.pop();
@@ -118,8 +118,11 @@ int main(void)
         Pos right_pos = coord[right_god];
         double cost = calc_dist(left_pos, right_pos);
 
-        merge_union(left_god, right_god);
-        mst.push_back(Edge{left_god, right_god, cost, true});
+        if (find_parent(left_god) != find_parent(right_god))
+        {
+            merge_union(left_god, right_god);
+            mst.push_back(Edge{left_god, right_god, cost, true});
+        }
     }
 
     kruskal_algorithm();
